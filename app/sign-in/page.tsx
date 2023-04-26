@@ -3,8 +3,8 @@ import Script from "next/script";
 
 type Props = {};
 
-const Map = async () => {
-  return <div></div>;
+const SignIn = () => {
+  return <div>Sign In Page</div>;
 };
 
-export default Map;
+export default SignIn;

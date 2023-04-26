@@ -23,15 +23,15 @@ const Navbar = () => {
       <nav className="flex gap-2 items-center sm:gap-4">
         <Link
           className="bg-orange-400 text-white font-bold py-2 px-3 text-sm sm:py-3 sm:px-5 rounded-full whitespace-pre"
-          href="/"
+          href="/sign-in"
         >
           Sign In
         </Link>
         <Link
           className="bg-orange-400 text-white font-bold py-2 px-3 text-sm sm:py-3 sm:px-5 rounded-full whitespace-pre"
-          href="/"
+          href="/create-account"
         >
-          Create Accout
+          Create Account
         </Link>
       </nav>
     </header>
