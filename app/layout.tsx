@@ -5,6 +5,7 @@ const inter = Inter({ subsets: ["latin"] });
 // Components
 import Navbar from "@components/Navbar";
 import Footer from "@components/Footer";
+import { Providers } from "./GlobalRedux/provider";
 
 export const metadata = {
   title: "Risk Viz Weather App",
@@ -19,9 +20,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Navbar />
-        {children}
-        <Footer />
+        <Providers>
+          <Navbar />
+          {children}
+          <Footer />
+        </Providers>
       </body>
     </html>
   );
