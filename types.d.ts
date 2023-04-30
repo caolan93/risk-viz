@@ -1,8 +1,7 @@
 type DataType = {
-  "Asset Name": string;
-  Lat: number;
-  Long: number;
-  "Business Category": string;
-  "Risk Rating": number;
-  "Risk Factors": { [string: number] };
+  range: string;
+  majorDimension: string;
+  values: Array[string];
 };
+
+type DataArr = Array[string];

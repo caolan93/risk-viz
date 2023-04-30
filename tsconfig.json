@@ -19,6 +19,7 @@
         "name": "next"
       }
     ],
+    "types": ["gapi", "gapi.auth2", "gapi.client", "gapi.client.drive"],
     "paths": {
       "@/*": ["./*"],
       "@components/*": ["./app/(components)/*"],
@@ -26,6 +27,12 @@
       "@lib/*": ["./app/lib/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "app/lib/googleSheets/get.js"
+  ],
   "exclude": ["node_modules"]
 }
