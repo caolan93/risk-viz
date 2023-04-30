@@ -5,3 +5,8 @@ type DataType = {
 };
 
 type DataArr = Array[string];
+
+type Cols = {
+  label: string;
+  accessor: any;
+}[];
