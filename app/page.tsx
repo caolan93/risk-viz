@@ -13,10 +13,9 @@ export default function Home() {
           data!
         </p>
       </div>
+      <Map />
       <div className="flex gap-4 flex-wrap lg:flex-nowrap">
-        <Map />
-        {/* @ts-expect-error Async Server Component */}
-        <Table />
+        {/* <Table /> */}
       </div>
       <div>{/* <ChartTable /> */}</div>
     </main>
