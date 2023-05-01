@@ -1,6 +1,7 @@
 import Image from "next/image";
-import Table from "@components/Table";
+import Table from "@components/table/Table";
 import Map from "@/app/(components)/Map";
+import ChartTable from "./(components)/ChartTable";
 
 export default function Home() {
   return (
@@ -17,6 +18,7 @@ export default function Home() {
         {/* @ts-expect-error Async Server Component */}
         <Table />
       </div>
+      <div>{/* <ChartTable /> */}</div>
     </main>
   );
 }

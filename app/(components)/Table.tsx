@@ -1,53 +1,121 @@
-import React from "react";
-import { getHeaderData, getTableData } from "../lib/googleSheets/get";
+"use client";
 
-type Props = {
-  className?: string;
-};
+import { MouseEventHandler, useCallback, useState } from "react";
+type Data = typeof data;
 
-const Table = async ({ className }: Props) => {
-  // const titleArray = values?.splice(0, 1);
-  const headerData = getHeaderData();
-  const tableData = getTableData();
+type SortKeys = keyof Data[0];
 
-  const [header, table] = await Promise.all([headerData, tableData]);
+type SortOrder = "ascn" | "desc";
+
+function sortData({
+  tableData,
+  sortKey,
+  reverse,
+}: {
+  tableData: Data;
+  sortKey: SortKeys;
+  reverse: boolean;
+}) {
+  if (!sortKey) return tableData;
+
+  const sortedData = data.sort((a, b) => {
+    return a[sortKey] > b[sortKey] ? 1 : -1;
+  });
+
+  if (reverse) {
+    return sortedData.reverse();
+  }
+
+  return sortedData;
+}
+
+function SortButton({
+  sortOrder,
+  columnKey,
+  sortKey,
+  onClick,
+}: {
+  sortOrder: SortOrder;
+  columnKey: SortKeys;
+  sortKey: SortKeys;
+  onClick: MouseEventHandler<HTMLButtonElement>;
+}) {
+  return (
+    <button
+      onClick={onClick}
+      className={`${
+        sortKey === columnKey && sortOrder === "desc"
+          ? "sort-button sort-reverse"
+          : "sort-button"
+      }`}
+    >
+      ▲
+    </button>
+  );
+}
+
+function SortableTable({ data }: { data: Data }) {
+  const [sortKey, setSortKey] = useState<SortKeys>("last_name");
+  const [sortOrder, setSortOrder] = useState<SortOrder>("ascn");
+
+  const headers: { key: SortKeys; label: string }[] = [
+    { key: "id", label: "ID" },
+    { key: "first_name", label: "First name" },
+    { key: "last_name", label: "Last name" },
+    { key: "email", label: "Email" },
+    { key: "gender", label: "Gender" },
+    { key: "ip_address", label: "IP address" },
+  ];
+
+  const sortedData = useCallback(
+    () => sortData({ tableData: data, sortKey, reverse: sortOrder === "desc" }),
+    [data, sortKey, sortOrder]
+  );
+
+  function changeSort(key: SortKeys) {
+    setSortOrder(sortOrder === "ascn" ? "desc" : "ascn");
+
+    setSortKey(key);
+  }
 
   return (
-    <section
-      className={`flex flex-wrap basis-full content-start lg:basis-1/2 lg:flex-shrink justify-start overflow-hidden hover:overflow-x-scroll rounded-md ${
-        className && className
-      } `}
-    >
-      <table className="shadow-md w-full">
-        <thead className="">
-          <tr className="">
-            {header.values?.map((value: string, index: number) => (
-              <th
-                key={index + 1}
-                className="p-3 border border-gray-50 bg-orange-300 text-white"
-              >
-                {value}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody className="">
-          {table?.values?.map((value: Array<string>, index: number) => (
-            <tr key={index + 1} className="">
-              {value.map((innerValue: string, index: number) => (
-                <td
-                  key={index + 1}
-                  className="p-3 text-center text-slate-800 border bg-gray-100 border-gray-200"
-                >
-                  {innerValue}
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </section>
-  );
-};
+    <table>
+      <thead>
+        <tr>
+          {headers.map((row) => {
+            return (
+              <td key={row.key}>
+                {row.label}{" "}
+                <SortButton
+                  columnKey={row.key}
+                  onClick={() => changeSort(row.key)}
+                  {...{
+                    sortOrder,
+                    sortKey,
+                  }}
+                />
+              </td>
+            );
+          })}
+        </tr>
+      </thead>
 
-export default Table;
+      <tbody>
+        {sortedData().map((person) => {
+          return (
+            <tr key={person.id}>
+              <td>{person.id}</td>
+              <td>{person.first_name}</td>
+              <td>{person.last_name}</td>
+              <td>{person.email}</td>
+              <td>{person.gender}</td>
+              <td>{person.ip_address}</td>
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
+  );
+}
+
+export default SortableTable;
