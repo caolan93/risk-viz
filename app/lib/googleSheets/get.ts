@@ -10,26 +10,12 @@ export async function getHeaderData() {
 
   let data = await res?.json();
 
-  let objKeys = [
-    "asset_name",
-    "lat",
-    "long",
-    "business_category",
-    "risk_rating",
-    "risk_factor",
-    "year",
-  ];
-
-  let jsonData: [] | ObjectTable[];
-
-  jsonData = createObj(objKeys, data);
-
-  return jsonData;
+  return data;
 }
 
-export async function getTableData(range?: string) {
+export async function getTableDataJSON(range?: string) {
   if (!range) {
-    range = "A2:G2";
+    range = "A2:G11";
   }
 
   // if (next && !prev) {
@@ -57,9 +43,9 @@ export async function getTableData(range?: string) {
     "year",
   ];
 
-  let jsonData: [] | ObjectTable[];
+  let jsonData: ObjectTable[];
 
-  jsonData = createObj(objKeys, data);
+  jsonData = createObj(objKeys, data.values);
 
-  return jsonData;
+  return [jsonData, range];
 }
