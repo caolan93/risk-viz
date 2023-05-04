@@ -3,13 +3,13 @@ import Table from "@components/table/Table";
 import Map from "@/app/(components)/Map/Map";
 import LineChart from "./(components)/chart/LineChart";
 
-import { getHeaderData, getTableData } from "@/app/lib/googleSheets/get";
+import { getHeaderData, getTableDataJSON } from "@/app/lib/googleSheets/get";
 
 export default async function Home() {
-  const tableData = await getTableData();
-  const headerData = await getHeaderData();
+  // const tableData = await getTableData();
+  // const headerData = await getHeaderData();
 
-  const [table, header] = await Promise.all([tableData, headerData]);
+  // const [table, header] = await Promise.all([tableData, headerData]);
 
   // const nextTableData = async () => {
   //   "use server";
@@ -23,12 +23,6 @@ export default async function Home() {
 
   return (
     <main className="p-4 justify-center bg-white">
-      <div className="my-5">
-        <h2 className="text-center text-3xl font-bold mb-3">Take A Look!</h2>
-        <p className="text-center text-sm">
-          {/* Currently displaying {tableData.range.slice(12)} */}
-        </p>
-      </div>
       {/* 
       <Map
         tableData={tableData.values}

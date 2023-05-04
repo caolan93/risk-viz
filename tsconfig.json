@@ -32,7 +32,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "app/lib/googleSheets/get.js"
+    "app/lib/googleSheets/get.js",
+    "app/(components)/table/TableHeader.jsx"
   ],
   "exclude": ["node_modules"]
 }

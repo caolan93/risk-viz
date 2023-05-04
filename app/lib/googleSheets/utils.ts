@@ -3,23 +3,15 @@ import { stringify } from "querystring";
 export const paginationNext = (range: string) => {
   let split = range.split(":");
 
-  let a = split[0];
-  let b = split[1];
+  let a = split[0].slice(1);
+  let b = split[1].slice(1);
 
   let parseA = parseInt(a);
 
-  if (parseA < 2 || parseA > 4900) {
-    return range;
-  }
-
   let parseB = parseInt(b);
 
-  if (parseB < 101 || parseB > 5001) {
-    return range;
-  }
-
-  parseA += 100;
-  parseB += 100;
+  parseA += 10;
+  parseB += 10;
 
   a = parseA.toString();
   b = parseB.toString();
@@ -32,23 +24,15 @@ export const paginationNext = (range: string) => {
 export const paginationPrev = (range: string) => {
   let split = range.split(":");
 
-  let a = split[0];
-  let b = split[1];
+  let a = split[0].slice(1);
+  let b = split[1].slice(1);
 
   let parseA = parseInt(a);
 
-  if (parseA < 2 || parseA > 4900) {
-    return range;
-  }
-
   let parseB = parseInt(b);
 
-  if (parseB < 101 || parseB > 5001) {
-    return range;
-  }
-
-  parseA -= 100;
-  parseB -= 100;
+  parseA -= 10;
+  parseB -= 10;
 
   a = parseA.toString();
   b = parseB.toString();
