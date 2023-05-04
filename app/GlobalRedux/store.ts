@@ -1,12 +1,14 @@
 "use client";
 
-import { configureStore } from "@reduxjs/toolkit";
-import counterSlice from "./Features/counterSlice";
+import { configureStore, EnhancedStore } from "@reduxjs/toolkit";
+import googleRangeReducer from "./Features/googleRange/googleRange";
+import { composeWithDevTools } from "redux-devtools-extension";
 
-export const store = configureStore({
+export const store: EnhancedStore = configureStore({
   reducer: {
-    counter: counterSlice,
+    googleRange: googleRangeReducer,
   },
+  enhancer: composeWithDevTools(),
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
