@@ -8,38 +8,60 @@ import React, {
 } from "react";
 
 type Props = {
-  table: TableData[];
-  cols: {
-    label: string;
-    key: string;
-  }[];
+  table: ObjectTable[];
 };
 
-const TableBody = ({ table, cols }: Props) => {
+const TableBody = ({ table }: Props) => {
   const [tableData, setTableData] = useState<Array<TableData>>([]);
   const [sortOrder, setSortOrder] = useState<SortOrder>("ascn");
   const [sortKey, setSortKey] = useState<SortKeys>("asset_name");
 
-  useEffect(() => {
-    setTableData(table);
-
-    console.log("table data");
-  }, []);
-
   return (
     <tbody className="bg-orange-50">
-      {tableData?.map((value, index: number) => (
+      {table?.map((value, index: number) => (
         <tr key={index + 1} className="even:bg-red-100">
-          {value.map((innerValue: string, index: number) => {
-            return (
-              <td
-                key={cols[index]?.key}
-                className="font-bold text-center border-r border-gray-300 p-3 "
-              >
-                {innerValue}
-              </td>
-            );
-          })}
+          <td
+            key={index}
+            className="font-bold text-center border-r border-gray-300 p-3 "
+          >
+            {value.asset_name}
+          </td>
+          <td
+            key={index}
+            className="font-bold text-center border-r border-gray-300 p-3 "
+          >
+            {value.lat}
+          </td>
+          <td
+            key={index}
+            className="font-bold text-center border-r border-gray-300 p-3 "
+          >
+            {value.long}
+          </td>
+          <td
+            key={index}
+            className="font-bold text-center border-r border-gray-300 p-3 "
+          >
+            {value.business_category}
+          </td>
+          <td
+            key={index}
+            className="font-bold text-center border-r border-gray-300 p-3 "
+          >
+            {value.risk_factor}
+          </td>
+          <td
+            key={index}
+            className="font-bold text-center border-r border-gray-300 p-3 "
+          >
+            {value.risk_rating}
+          </td>
+          <td
+            key={index}
+            className="font-bold text-center border-r border-gray-300 p-3 "
+          >
+            {value.year}
+          </td>
         </tr>
       ))}
     </tbody>

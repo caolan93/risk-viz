@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Table from "@components/table/Table";
 import Map from "@/app/(components)/Map/Map";
-import ChartTable from "./(components)/ChartTable";
+import LineChart from "./(components)/chart/LineChart";
 
 import { getHeaderData, getTableData } from "@/app/lib/googleSheets/get";
 
@@ -11,20 +11,34 @@ export default async function Home() {
 
   const [table, header] = await Promise.all([tableData, headerData]);
 
+  // const nextTableData = async () => {
+  //   "use server";
+  //   tableData(tableData.range.slice(12), true, false);
+  // };
+
+  // const prevTableData = async () => {
+  //   "use server";
+  //   tableData(tableData.range.slice(12), true, false);
+  // };
+
   return (
-    <main className="p-4 justify-center bg-gray-100">
+    <main className="p-4 justify-center bg-white">
       <div className="my-5">
         <h2 className="text-center text-3xl font-bold mb-3">Take A Look!</h2>
         <p className="text-center text-sm">
-          Below you can see our interactive map where you can find previous
-          data!
+          {/* Currently displaying {tableData.range.slice(12)} */}
         </p>
       </div>
-      <Map tableData={tableData.values} />
+      {/* 
+      <Map
+        tableData={tableData.values}
+        // nextTableData={nextTableData}
+        // prevTableData={prevTableData}
+      /> */}
       <div className="flex gap-4 flex-wrap lg:flex-nowrap">
-        {/* <Table /> */}
+        <Table />
       </div>
-      <div>{/* <ChartTable /> */}</div>
+      {/* <LineChart tableData={tableData.values} /> */}
     </main>
   );
 }

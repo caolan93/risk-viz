@@ -35,6 +35,186 @@
       "0.69",
       "{\"Drought\": 0.69}",
       "2060"
+    ],
+    [
+      "Willis-Newman",
+      "53.51684",
+      "-113.3187",
+      "Energy",
+      "0.46",
+      "{\"Extreme heat\": 0.03, \"Drought\": 0.0, \"Sea level rise\": 0.05, \"Earthquake\": 0.06, \"Flooding\": 0.07, \"Wildfire\": 0.09, \"Hurricane\": 0.07, \"Extreme cold\": 0.09}",
+      "2050"
+    ],
+    [
+      "Bender, Warren and Sanchez",
+      "45.44868",
+      "-73.81669",
+      "Healthcare",
+      "0.67",
+      "{\"Earthquake\": 0.06999999999999999, \"Sea level rise\": 0.06, \"Tornado\": 0.05, \"Drought\": 0.1, \"Wildfire\": 0.15, \"Extreme cold\": 0.04, \"Extreme heat\": 0.06, \"Volcano\": 0.11, \"Hurricane\": 0.03}",
+      "2070"
+    ],
+    [
+      "Johnson and Sons",
+      "42.8334",
+      "-80.38297",
+      "Manufacturing",
+      "0.48",
+      "{\"Sea level rise\": 0.07, \"Wildfire\": 0.1, \"Hurricane\": 0.31}",
+      "2030"
+    ],
+    [
+      "Mejia, Roberts and Gay",
+      "46.1351",
+      "-60.1831",
+      "Energy",
+      "0.02",
+      "{\"Volcano\": 0.0, \"Hurricane\": 0.0, \"Drought\": 0.0, \"Tornado\": 0.01, \"Extreme heat\": 0.01}",
+      "2050"
+    ],
+    [
+      "Flynn-Anderson",
+      "45.40008",
+      "-73.58248",
+      "Finance",
+      "0.6",
+      "{\"Extreme heat\": 0.56, \"Hurricane\": 0.04}",
+      "2030"
+    ],
+    [
+      "Thomas-Chavez",
+      "42.8334",
+      "-80.38297",
+      "Finance",
+      "0.85",
+      "{\"Earthquake\": 0.04, \"Tornado\": 0.13, \"Drought\": 0.11, \"Flooding\": 0.08, \"Extreme cold\": 0.08, \"Sea level rise\": 0.04, \"Wildfire\": 0.08, \"Extreme heat\": 0.14, \"Volcano\": 0.15}",
+      "2050"
+    ],
+    [
+      "Reid PLC",
+      "45.44868",
+      "-73.81669",
+      "Energy",
+      "0.61",
+      "{\"Volcano\": 0.23, \"Drought\": 0.09, \"Hurricane\": 0.06, \"Extreme heat\": 0.06, \"Wildfire\": 0.14, \"Tornado\": 0.03}",
+      "2060"
+    ],
+    [
+      "Hall, Meadows and Anderson",
+      "46.1351",
+      "-60.1831",
+      "Technology",
+      "0.18",
+      "{\"Tornado\": 0.15, \"Flooding\": 0.03}",
+      "2070"
+    ],
+    [
+      "Miller-Norris",
+      "50.26729",
+      "-119.27337",
+      "Energy",
+      "0.76",
+      "{\"Extreme cold\": 0.05, \"Volcano\": 0.1, \"Earthquake\": 0.06, \"Hurricane\": 0.11, \"Tornado\": 0.12, \"Sea level rise\": 0.04, \"Extreme heat\": 0.05, \"Drought\": 0.09, \"Wildfire\": 0.14}",
+      "2070"
+    ],
+    [
+      "Landry, Molina and Green",
+      "42.8334",
+      "-80.38297",
+      "Manufacturing",
+      "0.18",
+      "{\"Tornado\": 0.02, \"Extreme heat\": 0.03, \"Sea level rise\": 0.0, \"Earthquake\": 0.04, \"Hurricane\": 0.03, \"Extreme cold\": 0.03, \"Volcano\": 0.03, \"Flooding\": 0.0}",
+      "2060"
+    ],
+    [
+      "Jones Ltd",
+      "45.43341",
+      "-73.86586",
+      "Technology",
+      "0.67",
+      "{\"Drought\": 0.09, \"Volcano\": 0.11, \"Extreme cold\": 0.03, \"Extreme heat\": 0.07, \"Flooding\": 0.09, \"Sea level rise\": 0.1, \"Hurricane\": 0.11, \"Earthquake\": 0.0, \"Tornado\": 0.07}",
+      "2050"
+    ],
+    [
+      "Banks-Carlson",
+      "53.51684",
+      "-113.3187",
+      "Technology",
+      "0.3",
+      "{\"Volcano\": 0.12, \"Flooding\": 0.1, \"Earthquake\": 0.08}",
+      "2040"
+    ],
+    [
+      "Acevedo-Kennedy",
+      "43.86682",
+      "-79.2663",
+      "Energy",
+      "0.05",
+      "{\"Earthquake\": 0.02, \"Sea level rise\": 0.01, \"Extreme cold\": 0.02}",
+      "2060"
+    ],
+    [
+      "Taylor, Mitchell and Ward",
+      "46.23899",
+      "-63.13414",
+      "Technology",
+      "0.05",
+      "{\"Flooding\": 0.0, \"Tornado\": 0.01, \"Extreme heat\": 0.01, \"Hurricane\": 0.0, \"Sea level rise\": 0.01, \"Extreme cold\": 0.01, \"Wildfire\": 0.0, \"Drought\": 0.01}",
+      "2050"
+    ],
+    [
+      "Martin-Jenkins",
+      "46.23899",
+      "-63.13414",
+      "Technology",
+      "0.56",
+      "{\"Drought\": 0.13, \"Extreme cold\": 0.12, \"Hurricane\": 0.13, \"Wildfire\": 0.02, \"Sea level rise\": 0.01, \"Flooding\": 0.15}",
+      "2070"
+    ],
+    [
+      "Stanton-Joyce",
+      "42.8334",
+      "-80.38297",
+      "Retail",
+      "0.4",
+      "{\"Hurricane\": 0.39, \"Volcano\": 0.01}",
+      "2030"
+    ],
+    [
+      "Grant-Coffey",
+      "45.4473",
+      "-73.75335",
+      "Manufacturing",
+      "0.68",
+      "{\"Flooding\": 0.28, \"Hurricane\": 0.09, \"Tornado\": 0.31}",
+      "2030"
+    ],
+    [
+      "Mcknight, Beasley and Stewart",
+      "50.26729",
+      "-119.27337",
+      "Manufacturing",
+      "0.27",
+      "{\"Drought\": 0.03, \"Tornado\": 0.02, \"Sea level rise\": 0.04, \"Volcano\": 0.04, \"Extreme heat\": 0.05, \"Flooding\": 0.05, \"Wildfire\": 0.04}",
+      "2030"
+    ],
+    [
+      "Alvarez Inc",
+      "46.1351",
+      "-60.1831",
+      "Retail",
+      "0.73",
+      "{\"Volcano\": 0.73}",
+      "2070"
+    ],
+    [
+      "Banks-Carlson",
+      "42.8334",
+      "-80.38297",
+      "Manufacturing",
+      "0.02",
+      "{\"Earthquake\": 0.02, \"Drought\": 0.0, \"Tornado\": 0.0, \"Flooding\": 0.0, \"Volcano\": 0.0, \"Hurricane\": 0.0, \"Extreme cold\": 0.0, \"Wildfire\": 0.0, \"Sea level rise\": 0.0, \"Extreme heat\": 0.0}",
+      "2060"
     ]
   ]
 }

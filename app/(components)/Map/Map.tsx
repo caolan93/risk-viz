@@ -3,10 +3,11 @@
 // Google Map
 import {
   GoogleMap,
-  InfoBox,
+  InfoBoxF,
   InfoWindow,
   InfoWindowF,
   Marker,
+  MarkerF,
   useLoadScript,
 } from "@react-google-maps/api";
 import { useState } from "react";
@@ -24,6 +25,7 @@ import {
   whichMarker,
   getDiffYears,
 } from "./mapUtils";
+import Spinner from "../Spinner";
 
 type Props = {
   tableData: TableData[];
@@ -31,11 +33,12 @@ type Props = {
 
 const Map = ({ tableData }: Props) => {
   const [selectYear, setSelectYear] = useState("");
+  const [showMarker, setShowMarker] = useState(false);
 
-  const { isLoaded } = useLoadScript({
-    googleMapsApiKey: "AIzaSyC085kBESY6TaCyBt1RuhhjEFz1j0E33iM",
-    language: "EN",
-  });
+  // const { isLoaded } = useLoadScript({
+  //   googleMapsApiKey: process.env.GOOGLE_MAP_API,
+  //   language: "EN",
+  // });
 
   const containerStyle: ContainerStyle = {
     width: "100%",
@@ -52,21 +55,34 @@ const Map = ({ tableData }: Props) => {
   let years: Array<string>;
   years = getDiffYears(tableData);
 
-  const handleMarker = (e: google.maps.MapMouseEvent) => {
+  const handleMarker = (e: google.maps.MapMouseEvent, value: Array<string>) => {
     // let marker: google.maps.LatLng;
     // let lat = e.latLng?.lng();
     // let lng = e.latLng?.lat();
     // marker = { lat, lng };
-    //   alert(
-    //   `Asset Name: ${value[0]}\nBusiness Category: ${value[3]}`
-    // )
+    alert(`Asset Name: ${value[0]}\nBusiness Category: ${value[3]}`);
+    setShowMarker(true);
   };
+
+  let objKeys = [
+    "asset_name",
+    "lat",
+    "long",
+    "business_category",
+    "risk_rating",
+    "risk_factor",
+    "year",
+  ];
+
+  let json: ObjectTable[];
 
   return (
     <div className="relative flex flex-wrap md:flex-nowrap">
       <div className="flex basis-full md:basis-9/12  h-[400px] md:h-[600px]">
         {!isLoaded ? (
-          <h1>Loading</h1>
+          <div className="flex basis-full justify-center items-center">
+            <Spinner />
+          </div>
         ) : (
           <GoogleMap
             center={{
@@ -92,15 +108,20 @@ const Map = ({ tableData }: Props) => {
                     lat: Number(value[1]),
                     lng: Number(value[2]),
                   }}
-                  onClick={(e) => handleMarker(e)}
+                  // onClick={(e) => handleMarker(e, value)}
+                  // onMouseOver={(e) => handleMarker(e, value)}
                   icon={marker}
-                ></Marker>
+                >
+                  <InfoWindow anchor={<Marker />}>
+                    <div>{value[0]}</div>
+                  </InfoWindow>
+                </Marker>
               );
             })}
           </GoogleMap>
         )}
       </div>
-      <div className="basis-full md:basis-3/12 bg-slate-300 p-2 flex-col justify-center items-center">
+      <div className="basis-full p-2 flex-col justify-center items-center md:ml-5 md:basis-3/12 md:shadow-md md:rounded-lg md:shadow-gray-400">
         <h3 className="font-bold text-center mb-2 text-md md:text-xl">
           Risk Rating Scale
         </h3>
@@ -177,16 +198,25 @@ const Map = ({ tableData }: Props) => {
             <h3 className="font-bold text-center mb-2 text-md md:text-xl">
               Change the decade
             </h3>
-            <div className="flex flex-col px-2 gap-2 items-center">
-              <button
-                className="bg-blue-400 shadow-md py-2 rounded-md w-24 bg text-white font-bold hover:scale-105 ease duration-200"
-                onClick={() => setSelectYear("")}
-              >
-                Show All Years
-              </button>
-              {years.map((value, i) => (
+            <div className="flex flex-col px-2 gap-2 items-center w-full">
+              <div className="flex basis-full w-full">
+                <button className="basis-1/3 bg-blue-400 shadow-md py-2 rounded-md w-full bg text-white font-bold scale-95 hover:scale-100 ease duration-200">
+                  Prev
+                </button>
                 <button
-                  className="bg-blue-400 shadow-md py-2 rounded-md w-24 bg text-white font-bold hover:scale-105 ease duration-200"
+                  className="basis-1/3 bg-blue-400 shadow-md py-2 rounded-md w-full bg text-white font-bold scale-95 hover:scale-100 ease duration-200"
+                  onClick={() => setSelectYear("")}
+                >
+                  Show All Years
+                </button>
+
+                <button className="basis-1/3 bg-blue-400 shadow-md py-2 rounded-md w-full bg text-white font-bold scale-95 hover:scale-100 ease duration-200">
+                  Next
+                </button>
+              </div>
+              {years.sort().map((value, i) => (
+                <button
+                  className="bg-blue-400 shadow-md py-2 rounded-md w-full bg text-white font-bold scale-95 hover:scale-100 ease duration-200"
                   onClick={() => setSelectYear(value)}
                   key={i}
                 >

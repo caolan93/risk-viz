@@ -82,3 +82,20 @@ export const getDiffYears = (years: TableData[]) => {
 
   return uniqueArr;
 };
+
+//Turns an array into an object with keys
+export const createObj = (keys: string[], values: string) => {
+  let newArray: ObjectTable[] = [];
+  // Loop through the keys array and use each value as a key in the result object
+  for (let i = 0; i < values.length; i++) {
+    const result = {};
+    for (let j = 0; j < keys.length; j++) {
+      const key = keys[j];
+      // Set the corresponding value in the values array as the value for this key
+      const value = values[i][j];
+      result[key] = value;
+    }
+    newArray.push(result);
+  }
+  return newArray;
+};
