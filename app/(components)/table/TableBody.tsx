@@ -9,18 +9,42 @@ import React, {
 
 type Props = {
   table: ObjectTable[];
+  cols: {
+    label: string;
+    key: string;
+  }[];
 };
 
-const TableBody = ({ table }: Props) => {
+const TableBody = ({ table, cols }: Props) => {
   const [tableData, setTableData] = useState<Array<TableData>>([]);
   const [sortOrder, setSortOrder] = useState<SortOrder>("ascn");
   const [sortKey, setSortKey] = useState<SortKeys>("asset_name");
 
   return (
     <tbody className="bg-orange-50">
-      {table?.map((value, index: number) => (
+      {table?.map((value: any, index: number) => (
         <tr key={index + 1} className="even:bg-red-100">
-          <td
+          {cols.map(({ key }) => {
+            const tData = value[key] ? value[key] : "-";
+
+            return (
+              <td
+                key={key}
+                className="font-bold text-center border-r border-gray-300 p-3"
+              >
+                {tData.replace(/[{}"]/g, "")}
+              </td>
+            );
+          })}
+        </tr>
+      ))}
+    </tbody>
+  );
+};
+
+export default TableBody;
+{
+  /* <td
             key={index}
             className="font-bold text-center border-r border-gray-300 p-3 "
           >
@@ -61,11 +85,5 @@ const TableBody = ({ table }: Props) => {
             className="font-bold text-center border-r border-gray-300 p-3 "
           >
             {value.year}
-          </td>
-        </tr>
-      ))}
-    </tbody>
-  );
-};
-
-export default TableBody;
+          </td> */
+}
