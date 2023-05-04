@@ -14,6 +14,16 @@ type TableData = [
   year: string
 ];
 
+type ObjectTable = {
+  asset_name: string | null;
+  lat: string | null;
+  long: string | null;
+  business_category: string | null;
+  risk_rating: string | null;
+  risk_factor: string | null;
+  year: string | null;
+};
+
 type SortKeys = "asset_name" | "risk_rating" | "year" | "business_categorys";
 
 type SortOrder = "ascn" | "desc";
@@ -46,3 +56,11 @@ interface MapState {
 type Years = {
   year: string;
 };
+
+declare global {
+  namespace NodeJS {
+    interface ProcessEnv {
+      GOOOGLE_MAP_API: string;
+    }
+  }
+}
