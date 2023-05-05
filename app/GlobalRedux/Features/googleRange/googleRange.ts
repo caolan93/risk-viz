@@ -16,7 +16,7 @@ const initialState: GoogleRangeState = {
 };
 
 // First, create the thunk
-export const getData = createAsyncThunk(
+export const getData: any = createAsyncThunk(
   "googleRange/getData",
   async (range?: string) => {
     const response = await getTableDataJSON(range);

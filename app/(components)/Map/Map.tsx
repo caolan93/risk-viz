@@ -3,6 +3,7 @@
 // Google Map
 import {
   GoogleMap,
+  GoogleMapProps,
   InfoWindowF,
   Marker,
   OverlayViewF,
@@ -33,8 +34,6 @@ import {
   decrement,
   getData,
 } from "@/app/GlobalRedux/Features/googleRange/googleRange";
-import { getTableDataJSON } from "@/app/lib/googleSheets/get";
-import { isAsyncThunkAction } from "@reduxjs/toolkit";
 
 type Props = {
   tableData: ObjectTable[];
@@ -53,7 +52,7 @@ const Map = () => {
 
   useEffect(() => {
     dispatch(getData(range));
-  }, []);
+  }, [range]);
 
   const dispatch = useDispatch();
 
@@ -72,7 +71,7 @@ const Map = () => {
   let years: string[];
   years = getDiffYears(tableData);
 
-  const handleMarker = (e: google.maps.MapMouseEvent, value: ObjectTable) => {
+  const handleMarker = (e: GoogleMapProps, value: ObjectTable) => {
     const { lat, long } = value;
     const parsedLat: number = parseFloat(lat);
     const parsedLong: number = parseFloat(long);
