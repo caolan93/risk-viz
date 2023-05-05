@@ -58,7 +58,7 @@ const Map = () => {
   const dispatch = useDispatch();
 
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: "AIzaSyC085kBESY6TaCyBt1RuhhjEFz1j0E33iM",
+    googleMapsApiKey: `${process.env.GOOGLE_MAP_API}`,
     language: "EN",
   });
 

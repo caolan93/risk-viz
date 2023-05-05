@@ -3,8 +3,8 @@ const nextConfig = {
   experimental: {
     appDir: true,
   },
-  publicRuntimeConfig: {
-    GOOGLE_API_KEY: "AIzaSyC085kBESY6TaCyBt1RuhhjEFz1j0E33iM",
+  env: {
+    GOOGLE_MAP_API: "AIzaSyC085kBESY6TaCyBt1RuhhjEFz1j0E33iM",
   },
 };
 
