@@ -34,6 +34,7 @@ const Table = (props: Props) => {
 
   const [isDisabled, setIsDisabled] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [filterValue, setFilterValue] = useState("");
 
   useEffect(() => {
     dispatch(getData(range));
@@ -51,17 +52,37 @@ const Table = (props: Props) => {
   ];
 
   const handleSorting = (sortField: keyof ObjectTable, sortOrder: string) => {
+    let sortedData = [...tableData];
+    if (filterValue !== "") {
+      sortedData = sortedData.filter((item) =>
+        Object.values(item)
+          .join(" ")
+          .toLowerCase()
+          .includes(filterValue.toLowerCase())
+      );
+    }
     if (sortField) {
-      const sorted = [...tableData].sort((a: ObjectTable, b: ObjectTable) => {
+      sortedData.sort((a: ObjectTable, b: ObjectTable) => {
         return (
-          // @ts-ignore
           a[sortField].toString().localeCompare(b[sortField].toString(), "en", {
             numeric: true,
           }) * (sortOrder === "asc" ? 1 : -1)
         );
       });
-      dispatch(sortTable(sorted));
     }
+    dispatch(sortTable(sortedData));
+  };
+
+  const handleFiltering = (value: string) => {
+    const filteredData = tableData.filter((item) =>
+      Object.values(item).join(" ").toLowerCase().includes(value.toLowerCase())
+    );
+    dispatch(sortTable(filteredData));
+  };
+
+  const handleReset = () => {
+    dispatch(getData(range));
+    setFilterValue("");
   };
 
   const nextCols = async () => {
@@ -82,6 +103,30 @@ const Table = (props: Props) => {
           <h2 className="text-xl md:text-3xl text-center font-bold my-4">
             Displaying columns {range}
           </h2>
+          <div className="flex items-center mb-4">
+            <label htmlFor="filter" className="mr-2">
+              Filter:
+            </label>
+            <input
+              type="text"
+              id="filter"
+              value={filterValue}
+              onChange={(e) => setFilterValue(e.target.value)}
+              className="border border-gray-300 rounded-md p-2"
+            />
+            <button
+              onClick={() => handleFiltering(filterValue)}
+              className="bg-blue-500 text-white rounded-md ml-2 px-4 py-2"
+            >
+              Filter
+            </button>
+            <button
+              onClick={handleReset}
+              className="bg-blue-500 text-white rounded-md ml-2 px-4 py-2"
+            >
+              Reset
+            </button>
+          </div>
           <div className="md:overflow-hidden h-[500px] md:h-auto overflow-scroll">
             <table className=" bg-gray-50 border border-gray-300 p-3 rounded-md shadow-lg shadow-gray-300  border-none w-full md:h-[1000px]">
               <TableHeader cols={cols} handleSorting={handleSorting} />

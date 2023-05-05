@@ -45,22 +45,14 @@ const Map = () => {
   const tableData = useSelector(
     (state: RootState) => state?.googleRange?.tableData
   );
-  const [isLoading, setIsLoading] = useState(true);
   const [selectYear, setSelectYear] = useState("");
   const [zoom, setZoom] = useState(3);
-  const [center, setCenter] = useState({});
+  const [center, setCenter] = useState<Coords>([47.116386, -101.299591]);
   const [showMarker, setShowMarker] = useState(false);
   const [hoveredMarker, setHoveredMarker] = useState(-1);
 
   useEffect(() => {
     dispatch(getData(range));
-    setIsLoading(false);
-  }, []);
-
-  useEffect(() => {
-    let coords = getCoordsArry(tableData);
-    let [data] = getCenterCoord(coords);
-    setCenter(data);
   }, []);
 
   const dispatch = useDispatch();
@@ -77,15 +69,15 @@ const Map = () => {
 
   //Function to get center point of all coordinates
 
-  let years: ObjectTable[];
+  let years: string[];
   years = getDiffYears(tableData);
 
   const handleMarker = (e: google.maps.MapMouseEvent, value: ObjectTable) => {
     const { lat, long } = value;
     const parsedLat: number = parseFloat(lat);
     const parsedLong: number = parseFloat(long);
-    setCenter({ parsedLat, parsedLong });
-    setZoom(5);
+    setCenter([parsedLat, parsedLong]);
+    setZoom(6);
   };
 
   return (
@@ -107,8 +99,8 @@ const Map = () => {
           ) : (
             <GoogleMap
               center={{
-                lat: center[0],
-                lng: center[1],
+                lat: parseFloat(center[0]),
+                lng: parseFloat(center[1]),
               }}
               mapContainerStyle={containerStyle}
               zoom={zoom}
@@ -123,26 +115,40 @@ const Map = () => {
 
                 return (
                   <Marker
-                    onClick={(e) => handleMarker(e, value)}
                     key={i}
                     position={{
                       lat: parseFloat(value?.lat),
                       lng: parseFloat(value?.long),
                     }}
-                    onMouseOver={() => setHoveredMarker(i)}
+                    onMouseOver={(e) => {
+                      handleMarker(e, value);
+                      setHoveredMarker(i);
+                    }}
                     icon={marker}
                   >
-                    <InfoWindowF
-                      position={{
-                        lat: parseFloat(value?.lat),
-                        lng: parseFloat(value?.long),
-                      }}
-                    >
-                      <div>
-                        {value.asset_name} <br />
-                        {value.business_category} <br />
-                      </div>
-                    </InfoWindowF>
+                    {hoveredMarker === i && (
+                      <InfoWindowF
+                        position={{
+                          lat: parseFloat(value?.lat),
+                          lng: parseFloat(value?.long),
+                        }}
+                      >
+                        <div>
+                          <p>
+                            <span className="font-bold">Asset Name: </span>
+                            {value.asset_name}
+                          </p>{" "}
+                          <br />
+                          <p>
+                            <span className="font-bold">
+                              Business Category:{" "}
+                            </span>
+                            {value.business_category}
+                          </p>
+                          <br />
+                        </div>
+                      </InfoWindowF>
+                    )}
                   </Marker>
                 );
               })}

@@ -4,8 +4,6 @@ import { useState, useEffect } from "react";
 import { Line } from "react-chartjs-2";
 import Chart from "chart.js/auto";
 import { CategoryScale } from "chart.js";
-
-// REDUX
 import { RootState } from "@/app/GlobalRedux/store";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -18,7 +16,7 @@ import {
 Chart.register(CategoryScale);
 
 type Props = {
-  tableData: ObjectTable;
+  tableData: ObjectTable[];
 };
 
 const LineChart = () => {
@@ -29,7 +27,7 @@ const LineChart = () => {
   const dispatch = useDispatch();
 
   const [chartData, setChartData] = useState({
-    labels: tableData.map((value: ObjectTable) => value?.year),
+    labels: tableData?.map((value: ObjectTable) => value?.year),
     datasets: [
       {
         label: "Risk Rating",
@@ -42,13 +40,16 @@ const LineChart = () => {
 
   useEffect(() => {
     dispatch(getData(range));
-  }, [range]);
+  }, [range, dispatch]);
+
   useEffect(() => {
     handleChartData(tableData);
   }, [tableData]);
 
   const handleChartData = (data: ObjectTable[]) => {
-    let newArr = [...data].sort((a, b) => a.year - b.year);
+    let newArr: ObjectTable[] | any[] = [...data].sort(
+      (a, b) => a.year - b.year
+    );
 
     console.log("sorted arr", newArr);
 
@@ -89,14 +90,14 @@ const LineChart = () => {
       <div className="flex justify-center">
         <button
           onClick={() => dispatch(decrement())}
-          disabled={range === "A2:G11" && true}
+          disabled={range === "A2:G11"}
           className="py-2 px-4 bg-blue-400 text-white font-bold rounded-md scale-95 hover:scale-100 ease duration-200 disabled:opacity-60 disabled:hover:scale-95"
         >
           Load Prev Data
         </button>
         <button
           onClick={() => dispatch(increment())}
-          disabled={range === "A4990:G5001" && true}
+          disabled={range === "A4990:G5001"}
           className="py-2 px-4 bg-blue-400 text-white font-bold rounded-md scale-95 hover:scale-100 ease duration-200 disabled:opacity-60 disabled:hover:scale-95"
         >
           Load Next Data
