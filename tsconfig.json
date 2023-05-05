@@ -19,7 +19,7 @@
         "name": "next"
       }
     ],
-    "types": ["gapi", "gapi.auth2", "gapi.client", "gapi.client.drive"],
+    "types": [],
     "paths": {
       "@/*": ["./*"],
       "@components/*": ["./app/(components)/*"],

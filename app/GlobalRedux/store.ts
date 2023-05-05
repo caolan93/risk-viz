@@ -2,7 +2,6 @@
 
 import { configureStore } from "@reduxjs/toolkit";
 import googleRangeReducer from "./Features/googleRange/googleRange";
-import { composeWithDevTools } from "redux-devtools-extension";
 
 export const store = configureStore({
   reducer: {
