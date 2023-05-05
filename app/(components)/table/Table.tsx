@@ -103,8 +103,8 @@ const Table = (props: Props) => {
           <h2 className="text-xl md:text-3xl text-center font-bold my-4">
             Displaying columns {range}
           </h2>
-          <div className="flex items-center mb-4">
-            <label htmlFor="filter" className="mr-2">
+          <div className="flex flex-col md:flex-row w-full gap-2 items-center mb-4">
+            <label htmlFor="filter" className="">
               Filter:
             </label>
             <input
@@ -112,17 +112,17 @@ const Table = (props: Props) => {
               id="filter"
               value={filterValue}
               onChange={(e) => setFilterValue(e.target.value)}
-              className="border border-gray-300 rounded-md p-2"
+              className="flex w-full border border-gray-300 rounded-md p-2  md:max-w-[200px] items"
             />
             <button
               onClick={() => handleFiltering(filterValue)}
-              className="bg-blue-500 text-white rounded-md ml-2 px-4 py-2"
+              className="bg-blue-500 flex w-full md:max-w-[200px] items-center text-center justify-center text-white rounded-md px-4 py-2"
             >
               Filter
             </button>
             <button
               onClick={handleReset}
-              className="bg-blue-500 text-white rounded-md ml-2 px-4 py-2"
+              className="bg-blue-500 flex w-full md:max-w-[200px] items-center text-center justify-center text-white rounded-md px-4 py-2"
             >
               Reset
             </button>
