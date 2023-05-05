@@ -94,7 +94,7 @@ const Map = () => {
             : ` showing just the year ${selectYear}`}
         </h2>
       </div>
-      <div className="flex basis-full flex-nowrap">
+      <div className="flex basis-full flex-wrap md:flex-nowrap">
         <div className="flex basis-full md:basis-9/12  h-[400px] md:h-[600px]">
           {!isLoaded ? (
             <div className="flex basis-full justify-center items-center">
