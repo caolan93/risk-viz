@@ -1,10 +1,10 @@
 "use client";
 
-import { configureStore, EnhancedStore } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 import googleRangeReducer from "./Features/googleRange/googleRange";
 import { composeWithDevTools } from "redux-devtools-extension";
 
-export const store: EnhancedStore = configureStore({
+export const store = configureStore({
   reducer: {
     googleRange: googleRangeReducer,
   },
