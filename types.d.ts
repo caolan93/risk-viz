@@ -15,13 +15,13 @@ type TableData = [
 ];
 
 type ObjectTable = {
-  asset_name: string | null;
-  lat: string | null;
-  long: string | null;
-  business_category: string | null;
-  risk_rating: string | null;
-  risk_factor: string | null;
-  year: string | null;
+  asset_name: string;
+  lat: string;
+  long: string;
+  business_category: string;
+  risk_rating: string;
+  risk_factor: string;
+  year: string;
 };
 
 type SortKeys = "asset_name" | "risk_rating" | "year" | "business_categorys";
@@ -41,7 +41,7 @@ type CustomMarker = {
   scale: number;
 };
 
-type Coords = [lat: number, lng: number];
+type Coords = [lat: string, lng: string];
 
 type ContainerStyle = {
   width: string;

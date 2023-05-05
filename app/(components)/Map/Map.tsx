@@ -39,6 +39,8 @@ type Props = {
   tableData: ObjectTable[];
 };
 
+type Center = [lat: number, long: number];
+
 const Map = () => {
   const range = useSelector((state: RootState) => state?.googleRange?.value);
   const tableData = useSelector(
@@ -46,9 +48,12 @@ const Map = () => {
   );
   const [selectYear, setSelectYear] = useState("");
   const [zoom, setZoom] = useState(3);
-  const [center, setCenter] = useState<Coords>([47.116386, -101.299591]);
+  const [center, setCenter] = useState<Center>([47.116386, -101.299591]);
   const [showMarker, setShowMarker] = useState(false);
   const [hoveredMarker, setHoveredMarker] = useState(-1);
+
+  let parsedLat: number;
+  let parsedLong: number;
 
   useEffect(() => {
     dispatch(getData(range));
@@ -98,8 +103,8 @@ const Map = () => {
           ) : (
             <GoogleMap
               center={{
-                lat: parseFloat(center[0]),
-                lng: parseFloat(center[1]),
+                lat: center[0],
+                lng: center[1],
               }}
               mapContainerStyle={containerStyle}
               zoom={zoom}
@@ -239,7 +244,7 @@ const Map = () => {
                   Show All Years
                 </button>
 
-                {years.sort().map((value: ObjectTable, i) => (
+                {years.sort().map((value, i) => (
                   <button
                     onClick={() => setSelectYear(value)}
                     className="bg-blue-400 shadow-md py-2 rounded-md w-full bg text-white font-bold scale-95 hover:scale-100 ease duration-200"
