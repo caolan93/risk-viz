@@ -19,26 +19,28 @@ import {
 
 type Props = {};
 
+type TableColumn = {
+  label: string;
+  key: string;
+  sortable: boolean;
+};
+
 const Table = (props: Props) => {
-  const range = useSelector((state: RootState) => state.googleRange.value);
+  const range = useSelector((state: RootState) => state?.googleRange?.value);
   const tableData = useSelector(
-    (state: RootState) => state.googleRange.tableData
+    (state: RootState) => state?.googleRange?.tableData
   );
   const dispatch = useDispatch();
 
-  const [isDisabled, setIsDisabled] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isDisabled, setIsDisabled] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     dispatch(getData(range));
     setIsLoading(false);
-
-    // if (range === "A2:G11") {
-    //   setIsDisabled(true);
-    // }
   }, [range]);
 
-  let cols = [
+  const cols: TableColumn[] = [
     { label: "Asset Name", key: "asset_name", sortable: true },
     { label: "Lat", key: "lat", sortable: true },
     { label: "Long", key: "long", sortable: true },
@@ -48,12 +50,9 @@ const Table = (props: Props) => {
     { label: "Year", key: "year", sortable: true },
   ];
 
-  const handleSorting = (
-    sortField: ObjectTable[keyof ObjectTable],
-    sortOrder: string
-  ) => {
+  const handleSorting = (sortField: keyof ObjectTable, sortOrder: string) => {
     if (sortField) {
-      const sorted = [...tableData].sort((a, b) => {
+      const sorted = [...tableData].sort((a: ObjectTable, b: ObjectTable) => {
         return (
           // @ts-ignore
           a[sortField].toString().localeCompare(b[sortField].toString(), "en", {
@@ -65,14 +64,13 @@ const Table = (props: Props) => {
     }
   };
 
-  const nextCols = async (value: string) => {
+  const nextCols = async () => {
     dispatch(increment());
   };
 
-  const prevCols = async (value: string) => {
+  const prevCols = async () => {
     dispatch(decrement());
   };
-
   return (
     <>
       {isLoading ? (
@@ -81,25 +79,25 @@ const Table = (props: Props) => {
         </div>
       ) : (
         <div className="flex flex-col overflow-hidden w-full">
-          <h2 className="text-xl text-center font-bold my-4">
+          <h2 className="text-xl md:text-3xl text-center font-bold my-4">
             Displaying columns {range}
           </h2>
-          <div className="overflow-x-scroll md:overflow-hidden">
-            <table className=" bg-gray-50 border border-gray-300 p-3 rounded-md shadow-lg shadow-gray-300  border-none w-full md:h-[800px]">
+          <div className="md:overflow-hidden h-[500px] md:h-auto overflow-scroll">
+            <table className=" bg-gray-50 border border-gray-300 p-3 rounded-md shadow-lg shadow-gray-300  border-none w-full md:h-[1000px]">
               <TableHeader cols={cols} handleSorting={handleSorting} />
               <TableBody cols={cols} table={tableData} />
             </table>
           </div>
           <div className="my-4 mx-auto flex content-start overflow-hidden justify-center">
             <button
-              onClick={() => prevCols(range)}
+              onClick={() => prevCols()}
               disabled={range === "A2:G11" && true}
               className="py-2 px-4 bg-blue-400 text-white font-bold rounded-md scale-95 hover:scale-100 ease duration-200 disabled:opacity-60 disabled:hover:scale-95"
             >
               Load Prev Data
             </button>
             <button
-              onClick={() => nextCols(range)}
+              onClick={() => nextCols()}
               disabled={range === "A4990:G5001" && true}
               className="py-2 px-4 bg-blue-400 text-white font-bold rounded-md scale-95 hover:scale-100 ease duration-200 disabled:opacity-60 disabled:hover:scale-95"
             >

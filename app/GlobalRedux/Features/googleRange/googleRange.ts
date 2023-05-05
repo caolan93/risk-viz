@@ -1,13 +1,19 @@
 "use client";
-
 import { paginationNext, paginationPrev } from "@/app/lib/googleSheets/utils";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-
 import { getTableDataJSON } from "@/app/lib/googleSheets/get";
 
-export interface CounterState {
+export interface GoogleRangeState {
   value: string;
+  tableData: any[];
+  loading: boolean;
 }
+
+const initialState: GoogleRangeState = {
+  value: "A2:G11",
+  tableData: [],
+  loading: false,
+};
 
 // First, create the thunk
 export const getData = createAsyncThunk(
@@ -18,9 +24,9 @@ export const getData = createAsyncThunk(
   }
 );
 
-export const googleRange = createSlice({
+export const googleRangeSlice = createSlice({
   name: "googleRange",
-  initialState: { value: "A2:G11", tableData: [], loading: false },
+  initialState,
   reducers: {
     increment: (state) => {
       state.value = paginationNext(state.value);
@@ -32,20 +38,21 @@ export const googleRange = createSlice({
       state.tableData = action.payload;
     },
   },
-  extraReducers: {
-    [getData.pending]: (state) => {
-      state.loading = true;
-    },
-    [getData.fulfilled]: (state, { payload }) => {
-      state.loading = false;
-      state.tableData = payload;
-    },
-    [getData.rejected]: (state) => {
-      state.loading = false;
-    },
+  extraReducers: (builder) => {
+    builder
+      .addCase(getData.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(getData.fulfilled, (state, { payload }) => {
+        state.loading = false;
+        state.tableData = payload;
+      })
+      .addCase(getData.rejected, (state) => {
+        state.loading = false;
+      });
   },
 });
 
-export const { increment, decrement, sortTable } = googleRange.actions;
+export const { increment, decrement, sortTable } = googleRangeSlice.actions;
 
-export default googleRange.reducer;
+export default googleRangeSlice.reducer;

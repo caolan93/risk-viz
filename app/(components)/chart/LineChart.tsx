@@ -5,8 +5,6 @@ import { Line } from "react-chartjs-2";
 import Chart from "chart.js/auto";
 import { CategoryScale } from "chart.js";
 
-import data from "../data.json";
-
 // REDUX
 import { RootState } from "@/app/GlobalRedux/store";
 import { useSelector, useDispatch } from "react-redux";
@@ -31,7 +29,7 @@ const LineChart = () => {
   const dispatch = useDispatch();
 
   const [chartData, setChartData] = useState({
-    labels: tableData?.map((value: ObjectTable) => value?.year).sort(),
+    labels: tableData.map((value: ObjectTable) => value?.year),
     datasets: [
       {
         label: "Risk Rating",
@@ -50,12 +48,16 @@ const LineChart = () => {
   }, [tableData]);
 
   const handleChartData = (data: ObjectTable[]) => {
+    let newArr = [...data].sort((a, b) => a.year - b.year);
+
+    console.log("sorted arr", newArr);
+
     setChartData({
-      labels: data?.map((value: ObjectTable) => value?.year).sort(),
+      labels: newArr?.map((value: ObjectTable) => value?.year),
       datasets: [
         {
           label: "Risk Rating",
-          data: data?.map((value: ObjectTable) => value?.risk_rating),
+          data: newArr?.map((value: ObjectTable) => value.risk_rating),
           borderColor: "black",
           borderWidth: 2,
         },
@@ -75,7 +77,7 @@ const LineChart = () => {
             plugins: {
               title: {
                 display: true,
-                text: "Users Gained between 2016-2020",
+                text: "Risk Ratings over time",
               },
               legend: {
                 display: false,

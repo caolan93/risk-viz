@@ -7,15 +7,24 @@ import {
   rCustomMarker,
 } from "./customMarkers";
 
-export const whichMarker = (value: Array<string>) => {
+export const whichMarker = (value: ObjectTable) => {
   let marker: CustomMarker;
-  if (Number(value[4]) < 0.2) {
+  if (Number(value.risk_rating) < 0.2) {
     marker = gCustomMarker;
-  } else if (Number(value[4]) >= 0.2 && Number(value[4]) < 0.4) {
+  } else if (
+    Number(value.risk_rating) >= 0.2 &&
+    Number(value.risk_rating) < 0.4
+  ) {
     marker = yCustomMarker;
-  } else if (Number(value[4]) >= 0.4 && Number(value[4]) < 0.6) {
+  } else if (
+    Number(value.risk_rating) >= 0.4 &&
+    Number(value.risk_rating) < 0.6
+  ) {
     marker = aCustomMarker;
-  } else if (Number(value[4]) >= 0.6 && Number(value[4]) < 0.8) {
+  } else if (
+    Number(value.risk_rating) >= 0.6 &&
+    Number(value.risk_rating) < 0.8
+  ) {
     marker = oCustomMarker;
   } else {
     marker = rCustomMarker;
@@ -24,7 +33,7 @@ export const whichMarker = (value: Array<string>) => {
   return marker;
 };
 
-export const getCenterCoord = (coords: Coords[]) => {
+export const getCenterCoord = (coords: Coords) => {
   let numCoords = coords.length;
   let x = 0;
   let y = 0;
@@ -52,11 +61,11 @@ export const getCenterCoord = (coords: Coords[]) => {
   return centerCoord;
 };
 
-export const getCoordsArry = (data: TableData[]) => {
+export const getCoordsArry = (data: ObjectTable[]) => {
   let arr: Coords[] = [];
   for (let i = 0; i < data.length; i++) {
-    let lat = Number(data[i][1]);
-    let lng = Number(data[i][2]);
+    let lat = parseInt(data[i].lat);
+    let lng = parseInt(data[i].long);
 
     arr.push([lat, lng]);
   }
@@ -68,12 +77,12 @@ type UniqueYears = {
   year: number;
 };
 
-export const getDiffYears = (years: TableData[]) => {
-  let data = [];
-  let uniqueArr = [];
+export const getDiffYears = (years: ObjectTable[]) => {
+  let data: string[] = [];
+  let uniqueArr: string[] = [];
 
   for (let i = 0; i < years.length; i++) {
-    data.push(years[i][6]);
+    data.push(years[i].year);
   }
 
   uniqueArr = data.filter((value, index, self) => {

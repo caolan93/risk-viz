@@ -17,3 +17,8 @@ html {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
+
+/* Hiding styling on google map box tooltip */
+.gm-ui-hover-effect {
+  outline: none;
+}

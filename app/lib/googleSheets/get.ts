@@ -14,18 +14,6 @@ export async function getHeaderData() {
 }
 
 export async function getTableDataJSON(range?: string) {
-  if (!range) {
-    range = "A2:G11";
-  }
-
-  // if (next && !prev) {
-  //   range = paginationNext(range);
-  // } else if (prev && !next) {
-  //   range = paginationPrev(range);
-  // } else {
-  //   range = range;
-  // }
-
   let res = await fetch(
     `https://sheets.googleapis.com/v4/spreadsheets/1Y_yiT-_7IimioBvcqiCPwLzTLazfdRyzZ4k3cpQXiAw/values/${range}?key=AIzaSyC085kBESY6TaCyBt1RuhhjEFz1j0E33iM`
   );
@@ -47,5 +35,5 @@ export async function getTableDataJSON(range?: string) {
 
   jsonData = createObj(objKeys, data.values);
 
-  return [jsonData, range];
+  return jsonData;
 }
