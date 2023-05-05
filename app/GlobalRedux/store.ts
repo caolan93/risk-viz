@@ -8,8 +8,6 @@ export const store: EnhancedStore = configureStore({
   reducer: {
     googleRange: googleRangeReducer,
   },
-  // @ts-ignore
-  enhancer: composeWithDevTools(),
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
