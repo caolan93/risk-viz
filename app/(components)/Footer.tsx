@@ -1,4 +1,7 @@
 import React from "react";
+import Image from "next/image";
+
+import github from "@assets/github.svg";
 
 type Props = {};
 
@@ -6,7 +9,14 @@ const Footer = (props: Props) => {
   return (
     <footer className="flex flex-wrap justify-around items-center bg-black text-white px-5 py-3 gap-3 sm:py-6 sm:px-1">
       <ul className="flex basis-full flex-col gap-2 md:flex-row justify-evenly">
-        <li className="text-center md:text-left">Github</li>
+        <a
+          className="flex items-center justify-center gap-2"
+          href="https://github.com/caolan93/risk-viz"
+          target="_blank"
+        >
+          <Image src={github} height={20} width={20} />
+          <li className="text-center md:text-left">Github</li>
+        </a>
         <li className="text-center md:text-left">Toronto, ON.</li>
         <li className="text-center md:text-left">
           &copy; All Rights Reserved 2023.
