@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import TableHeader from "./TableHeader";
 import TableBody from "./TableBody";
-import { getHeaderData, getTableDataJSON } from "@/app/lib/googleSheets/get";
+import { getTableDataJSON } from "@/app/lib/googleSheets/get";
 import Spinner from "../Spinner";
 import { paginationNext, paginationPrev } from "@/app/lib/googleSheets/utils";
 
@@ -74,7 +74,7 @@ const Table = (props: Props) => {
   };
 
   const handleFiltering = (value: string) => {
-    const filteredData = tableData.filter((item) =>
+    const filteredData = tableData.filter((item: string[]) =>
       Object.values(item).join(" ").toLowerCase().includes(value.toLowerCase())
     );
     dispatch(sortTable(filteredData));
