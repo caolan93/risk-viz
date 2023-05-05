@@ -14,7 +14,7 @@ const Footer = (props: Props) => {
           href="https://github.com/caolan93/risk-viz"
           target="_blank"
         >
-          <Image src={github} height={20} width={20} />
+          <Image alt="Github icon" src={github} height={20} width={20} />
           <li className="text-center md:text-left">Github</li>
         </a>
         <li className="text-center md:text-left">Toronto, ON.</li>
