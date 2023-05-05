@@ -47,9 +47,8 @@ const LineChart = () => {
   }, [tableData]);
 
   const handleChartData = (data: ObjectTable[]) => {
-    let newArr: ObjectTable[] | any[] = [...data].sort(
-      (a, b) => a.year - b.year
-    );
+    // @ts-ignore
+    let newArr = [...data].sort((a, b) => a.year - b.year);
 
     console.log("sorted arr", newArr);
 
