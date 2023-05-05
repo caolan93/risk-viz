@@ -64,3 +64,5 @@ declare global {
     }
   }
 }
+
+type Center = [lat: number, long: number];

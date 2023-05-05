@@ -33,7 +33,7 @@ export const whichMarker = (value: ObjectTable) => {
   return marker;
 };
 
-export const getCenterCoord = (coords: Coords) => {
+export const getCenterCoord = (coords: Center[]) => {
   let numCoords = coords.length;
   let x = 0;
   let y = 0;
@@ -56,13 +56,13 @@ export const getCenterCoord = (coords: Coords) => {
   let hyp = Math.sqrt(x * x + y * y);
   let lat = Math.atan2(z, hyp);
 
-  let centerCoord: Coords = [(lat * 180) / Math.PI, (lon * 180) / Math.PI];
+  let centerCoord: Center = [(lat * 180) / Math.PI, (lon * 180) / Math.PI];
 
   return centerCoord;
 };
 
 export const getCoordsArry = (data: ObjectTable[]) => {
-  let arr: Coords[] = [];
+  let arr: Center[] = [];
   for (let i = 0; i < data.length; i++) {
     let lat = parseInt(data[i].lat);
     let lng = parseInt(data[i].long);
@@ -102,8 +102,10 @@ export const createObj = (keys: string[], values: string) => {
       const key = keys[j];
       // Set the corresponding value in the values array as the value for this key
       const value = values[i][j];
+      // @ts-ignore
       result[key] = value;
     }
+    // @ts-ignore
     newArray.push(result);
   }
   return newArray;
